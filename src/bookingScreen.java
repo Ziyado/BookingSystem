@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
  * An interface class for the system, this class contains searching and making
  * bookings with rooms on the database.
  *
- * @author Christopher
+ * 
  */
 public class bookingScreen extends javax.swing.JFrame {
 
@@ -20,7 +20,6 @@ public class bookingScreen extends javax.swing.JFrame {
     String authorisation;
     DefaultTableModel model;
     int capacity = 0;
-    boolean projector = false;
     String bookingTime = "";
     String date = "";
 
@@ -35,7 +34,7 @@ public class bookingScreen extends javax.swing.JFrame {
      *
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public bookingScreen(String ID, String author) throws SQLException {
+    public bookingScreen(String ID, String auth) throws SQLException {
 
         if (connection == null) {
             connection = new databaseConnect();
@@ -43,7 +42,7 @@ public class bookingScreen extends javax.swing.JFrame {
 
         // access the database
         guestID = ID;
-        authorisation = author;
+        authorisation = auth;
 
         initComponents();
     }
@@ -70,8 +69,6 @@ public class bookingScreen extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         dateLabel2 = new javax.swing.JLabel();
         spnCapacity = new javax.swing.JSpinner();
-        dateLabel = new javax.swing.JLabel();
-        checkProjector = new javax.swing.JCheckBox();
         datePicker = new org.jdesktop.swingx.JXDatePicker();
         dateLabel1 = new javax.swing.JLabel();
         timeLabel = new javax.swing.JLabel();
@@ -80,7 +77,7 @@ public class bookingScreen extends javax.swing.JFrame {
         roomsAvailable = new javax.swing.JTable();
         btnSearch = new javax.swing.JButton();
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "View guests", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "View users", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         textFirstName3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,14 +171,6 @@ public class bookingScreen extends javax.swing.JFrame {
 
         spnCapacity.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
-        dateLabel.setText("Projector:");
-
-        checkProjector.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkProjectorActionPerformed(evt);
-            }
-        });
-
         datePicker.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 datePickerActionPerformed(evt);
@@ -245,15 +234,14 @@ public class bookingScreen extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(dateLabel)
                                     .addComponent(dateLabel2)
                                     .addComponent(dateLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(spnCapacity, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(checkProjector)))
+                                    .addComponent(spnCapacity, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -265,10 +253,6 @@ public class bookingScreen extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dateLabel2)
                     .addComponent(spnCapacity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dateLabel)
-                    .addComponent(checkProjector))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,10 +299,6 @@ public class bookingScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void checkProjectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkProjectorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkProjectorActionPerformed
-
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
         model = (DefaultTableModel) roomsAvailable.getModel();
@@ -326,7 +306,6 @@ public class bookingScreen extends javax.swing.JFrame {
         model.setRowCount(0);
 
         capacity = (int) spnCapacity.getValue();
-        projector = checkProjector.isSelected();
 
         bookingTime = cmbTime.getSelectedItem().toString() + ":00";
 
@@ -335,7 +314,7 @@ public class bookingScreen extends javax.swing.JFrame {
             date = formater.format(datePicker.getDate());
 
             try {
-                connection.searchBookings(capacity, projector, bookingTime, date);
+                connection.searchBookings(capacity, bookingTime, date);
                 rs = connection.getRS();
             } catch (SQLException ex) {
                 Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
@@ -440,9 +419,7 @@ public class bookingScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnBook;
     private javax.swing.JButton btnLoginScreen;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JCheckBox checkProjector;
     private javax.swing.JComboBox<String> cmbTime;
-    private javax.swing.JLabel dateLabel;
     private javax.swing.JLabel dateLabel1;
     private javax.swing.JLabel dateLabel2;
     private org.jdesktop.swingx.JXDatePicker datePicker;

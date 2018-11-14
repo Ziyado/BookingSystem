@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
  * An interface class for the system, this class contains how the system will
  * add a new guest on to the system.
  *
- * @author Christopher
+ *
  */
 public class newUser extends javax.swing.JFrame {
 

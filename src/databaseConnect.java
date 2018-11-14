@@ -9,7 +9,7 @@ import javax.swing.JComboBox;
 /**
  * 
  * 
- * @author Christopher
+ * 
  */
 public class databaseConnect {
 
@@ -62,14 +62,12 @@ public class databaseConnect {
      * gets all bookings which match the entered fields into the bookings form
      * 
      * @param capacity minimum room size
-     * @param projector is a projector required
      * @param time time room is needed
      * @param date date room is needed
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public void searchBookings(int capacity, boolean projector, String time, String date) throws SQLException{
+    public void searchBookings(int capacity, String time, String date) throws SQLException{
     
-        boolean boolProjector = projector;
         int roomCap = capacity;
         String bookTime = "\"" + time + "\"";
         String bookDate =  "\"" + date + "\"";
@@ -77,15 +75,14 @@ public class databaseConnect {
         
             stmt = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
             String SQL;
-            SQL = String.format("SELECT * FROM room JOIN booking ON booking.roomID = room.id WHERE (room.projector = " + boolProjector + " AND room.capacity >= " + roomCap + " AND (booking.date <> " + bookDate + " AND booking.time <> " + bookTime + "))");
+            SQL = String.format("SELECT * FROM room JOIN booking ON booking.roomID = room.id WHERE (room.projector = " + " AND room.capacity >= " + roomCap + " AND (booking.date <> " + bookDate + " AND booking.time <> " + bookTime + "))");
             //Need way to check if room us taken at time
 
             /*
                 SELECT * FROM room
                 JOIN bookings
                 ON bookings.roomID = room.id	
-                WHERE room.projector = 0
-                AND room.capacity <= 20
+                WHERE room.capacity <= 20
                 AND !(bookings.date = "2016-11-16" AND bookings.time = "10:00:00")
              */
             rs = stmt.executeQuery(SQL);

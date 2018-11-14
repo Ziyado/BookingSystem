@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
  * can view guest details on the system, and how they will also edit various
  * details.
  *
- * @author Christopher
+ * 
  */
 public class userScreen extends javax.swing.JFrame {
     

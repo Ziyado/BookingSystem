@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
  * and edit their details if it is required while also being able to add new guests
  * on the system.
  *
- * @author Christopher
+ * 
  */
 public final class adminScreen extends javax.swing.JFrame {
 

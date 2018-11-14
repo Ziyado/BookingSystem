@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  * the system, so that the system will search for rooms and allow the guest to 
  * book a room.
  * 
- * @author Christopher
+ * 
  */
 public class myBookings extends javax.swing.JFrame {
 
@@ -22,7 +22,7 @@ public class myBookings extends javax.swing.JFrame {
     ResultSet rs;
     int curRow = 0;
     String ID;
-    String author;
+    String auth;
         
     /**
      *
@@ -37,7 +37,7 @@ public class myBookings extends javax.swing.JFrame {
         }
         
         ID = guestID;
-        author = authorisation;
+        auth = authorisation;
 
         initComponents();
         
@@ -380,7 +380,7 @@ public class myBookings extends javax.swing.JFrame {
 
         this.dispose();
 
-        if (author.equals("a")) {
+        if (auth.equals("a")) {
             try {
                 new mainMenuAdmin(ID).setVisible(true);
             } catch (SQLException ex) {
@@ -418,7 +418,7 @@ public class myBookings extends javax.swing.JFrame {
 
             this.dispose();
 
-            if (author.equals("a")) {
+            if (auth.equals("a")) {
                 try {
                     new mainMenuAdmin(ID).setVisible(true);
                 } catch (SQLException ex) {

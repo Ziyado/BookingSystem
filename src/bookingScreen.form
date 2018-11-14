@@ -215,8 +215,8 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="dateLabel" min="-2" max="-2" attributes="0"/>
                                       <Component id="dateLabel2" min="-2" max="-2" attributes="0"/>
                                       <Component id="dateLabel1" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -224,7 +224,6 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="datePicker" min="-2" max="-2" attributes="0"/>
                                       <Component id="spnCapacity" min="-2" pref="57" max="-2" attributes="0"/>
-                                      <Component id="checkProjector" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="jScrollPane1" alignment="0" min="-2" pref="554" max="-2" attributes="0"/>
@@ -244,12 +243,7 @@
                       <Component id="dateLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="spnCapacity" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="dateLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="checkProjector" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="datePicker" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="dateLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -279,16 +273,6 @@
               <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
             </Property>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="dateLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Projector:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="checkProjector">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkProjectorActionPerformed"/>
-          </Events>
         </Component>
         <Component class="org.jdesktop.swingx.JXDatePicker" name="datePicker">
           <Events>

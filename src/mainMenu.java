@@ -2,12 +2,13 @@
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * An interface class for the system, this class contains navigating options around
  * the system for the standard guest.
  * 
- * @author up772320
+ * 
  */
 public class mainMenu extends javax.swing.JFrame {
 
@@ -163,12 +164,16 @@ public class mainMenu extends javax.swing.JFrame {
         try {
             new myBookings(guestID, authorisation).setVisible(true);
         } catch (SQLException ex) {
+            //Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(mainMenu.this, "There are no bookings");
+            try {
+            new mainMenu(guestID).setVisible(true);
+        } catch (SQLException x) {
             Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
-            
     }//GEN-LAST:event_btnUserScreen1ActionPerformed
-
+    }
     private void btnUserScreen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserScreen2ActionPerformed
        
         try {

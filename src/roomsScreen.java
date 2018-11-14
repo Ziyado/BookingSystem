@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
  * An interface class for the system, this class contains the view for all rooms
  * which are on the database, allowing edit add and view controls to the viewer.
  * 
- * @author Christopher
+ * 
  */
 public final class roomsScreen extends javax.swing.JFrame {
 

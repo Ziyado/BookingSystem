@@ -8,7 +8,7 @@ import java.util.logging.Logger;
  * An interface class for the system, this class contains navigating options around
  * the system for the admin guest.
  * 
- * @author up772320
+ * 
  */
 public class mainMenuAdmin extends javax.swing.JFrame {
 
