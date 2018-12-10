@@ -80,9 +80,7 @@ public class myBookings extends javax.swing.JFrame {
         roomID = new javax.swing.JTextField();
         spnCap = new javax.swing.JSpinner();
         textDate = new javax.swing.JTextField();
-        lblProjector = new javax.swing.JLabel();
         lblType1 = new javax.swing.JLabel();
-        chkProj = new javax.swing.JCheckBox();
         textType = new javax.swing.JTextField();
         textTime = new javax.swing.JTextField();
         lblType = new javax.swing.JLabel();
@@ -160,11 +158,7 @@ public class myBookings extends javax.swing.JFrame {
             }
         });
 
-        lblProjector.setText("Projector");
-
         lblType1.setText("Room");
-
-        chkProj.setEnabled(false);
 
         textType.setEnabled(false);
         textType.addActionListener(new java.awt.event.ActionListener() {
@@ -205,22 +199,17 @@ public class myBookings extends javax.swing.JFrame {
                             .addComponent(spnCap, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(roomID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textType, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(203, 203, 203))
+                        .addGap(231, 231, 231))
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblProjector)
-                            .addComponent(lblProjector1))
+                        .addGap(32, 32, 32)
+                        .addComponent(lblProjector1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chkProj)
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addComponent(textDate, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblProjector2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textTime, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                        .addComponent(textDate, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblProjector2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textTime, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,10 +227,6 @@ public class myBookings extends javax.swing.JFrame {
                     .addComponent(spnCap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCapacity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chkProj)
-                    .addComponent(lblProjector))
-                .addGap(5, 5, 5)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblProjector1)
@@ -463,7 +448,6 @@ public class myBookings extends javax.swing.JFrame {
 
         textType.setText(type);
         roomID.setText(idRoom);
-        chkProj.setSelected(projector);
         spnCap.setValue(capacity);
         Format formatter = new SimpleDateFormat("yyyy-MM-dd");
         String bookingDate = formatter.format(date);
@@ -482,10 +466,8 @@ public class myBookings extends javax.swing.JFrame {
     private javax.swing.JButton btnLast;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrevious;
-    private javax.swing.JCheckBox chkProj;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JLabel lblCapacity;
-    private javax.swing.JLabel lblProjector;
     private javax.swing.JLabel lblProjector1;
     private javax.swing.JLabel lblProjector2;
     private javax.swing.JLabel lblType;

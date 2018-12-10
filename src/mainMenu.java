@@ -160,6 +160,20 @@ public class mainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogOutActionPerformed
 
     private void btnUserScreen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserScreen1ActionPerformed
+         try {
+            new myBookings(guestID, authorisation).setVisible(true);
+        } catch (SQLException ex) {
+            //Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(mainMenu.this, "There are no bookings");
+            try {
+            new mainMenu(guestID).setVisible(true);
+        } catch (SQLException x) {
+            Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
+    }                                              
+    
+        /*
         
         try {
             new myBookings(guestID, authorisation).setVisible(true);
@@ -171,9 +185,9 @@ public class mainMenu extends javax.swing.JFrame {
         } catch (SQLException x) {
             Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.dispose();
+        this.dispose();*/
     }//GEN-LAST:event_btnUserScreen1ActionPerformed
-    }
+    
     private void btnUserScreen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserScreen2ActionPerformed
        
         try {

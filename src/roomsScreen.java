@@ -23,7 +23,7 @@ public final class roomsScreen extends javax.swing.JFrame {
      * @param tempID temporarily stores the variable until moved to a global variable
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public roomsScreen(String tempID) throws SQLException {
+        public roomsScreen(String tempID) throws SQLException {
 
         // Connecting to a set database and storing that connection in connection con for reference.
         if (connection == null){
@@ -68,12 +68,10 @@ public final class roomsScreen extends javax.swing.JFrame {
             }
 
             int capacity = rs.getInt("capacity");
-            boolean projector = rs.getBoolean("projector");
 
             textID.setText(id);
             jCmbType.setSelectedIndex(typeIndex);
             spnCap.setValue(capacity);
-            chkProj.setSelected(projector);
             // Put all guest details to interface text boxes
 
         }
@@ -104,8 +102,6 @@ public final class roomsScreen extends javax.swing.JFrame {
         textID.setText(id);
         jCmbType.setSelectedIndex(typeIndex);
         spnCap.setValue(capacity);
-        chkProj.setSelected(projector);
-
     }
 
     /**
@@ -130,8 +126,6 @@ public final class roomsScreen extends javax.swing.JFrame {
         btnLoginScreen = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         spnCap = new javax.swing.JSpinner();
-        lblProjector = new javax.swing.JLabel();
-        chkProj = new javax.swing.JCheckBox();
         textID = new javax.swing.JTextField();
         lblType = new javax.swing.JLabel();
         lblCapacity = new javax.swing.JLabel();
@@ -228,8 +222,6 @@ public final class roomsScreen extends javax.swing.JFrame {
 
         spnCap.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
-        lblProjector.setText("Projector");
-
         textID.setEnabled(false);
         textID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,12 +254,7 @@ public final class roomsScreen extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCmbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(spnCap, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblProjector)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chkProj)))
+                            .addComponent(spnCap, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(254, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
@@ -282,10 +269,7 @@ public final class roomsScreen extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(spnCap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCapacity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chkProj)
-                    .addComponent(lblProjector)))
+                .addGap(3, 3, 3))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -348,7 +332,7 @@ public final class roomsScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSaveRecord)
                     .addComponent(btnCancelRecord))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
@@ -474,8 +458,6 @@ public final class roomsScreen extends javax.swing.JFrame {
         }
         
         int capacity = (int) spnCap.getValue();
-        boolean projector = chkProj.isSelected();
-
         
         int newID = Integer.parseInt(ID);
 
@@ -484,7 +466,6 @@ public final class roomsScreen extends javax.swing.JFrame {
             rs.updateInt("ID", newID);
             rs.updateString("type", type);
             rs.updateInt("capacity", capacity);
-            rs.updateBoolean("projector", projector);
             rs.updateRow();
             JOptionPane.showMessageDialog(roomsScreen.this, "Updated");
         } catch (SQLException err) {
@@ -528,8 +509,6 @@ public final class roomsScreen extends javax.swing.JFrame {
             textID.setText(id);
             jCmbType.setSelectedIndex(typeIndex);
             spnCap.setValue(capacity);
-            chkProj.setSelected(projector);
-
             //Set the buttons relevant clickable
             btnFirst.setEnabled(true);
             btnPrevious.setEnabled(true);
@@ -614,7 +593,6 @@ public final class roomsScreen extends javax.swing.JFrame {
         }
         
         int capacity = (int) spnCap.getValue();
-        boolean projector = chkProj.isSelected();
         
         int newID = Integer.parseInt(ID);
 
@@ -626,7 +604,6 @@ public final class roomsScreen extends javax.swing.JFrame {
             //rs.updateInt("ID", newID);
             rs.updateString("type", type);
             rs.updateInt("capacity", capacity);
-            rs.updateBoolean("projector", projector);
             rs.insertRow();
             
             connection.closeConnection();
@@ -645,13 +622,11 @@ public final class roomsScreen extends javax.swing.JFrame {
             }
 
             capacity = rs.getInt("capacity");
-            projector = rs.getBoolean("projector");
 
             //Put recordset details to the screen
             textID.setText(id);
             jCmbType.setSelectedIndex(typeIndex);
             spnCap.setValue(capacity);
-            chkProj.setSelected(projector);
 
             //Set necessary buttons to clickable
             btnFirst.setEnabled(true);
@@ -703,7 +678,6 @@ public final class roomsScreen extends javax.swing.JFrame {
             jCmbType.setSelectedIndex(1);
             spnCap.setValue(rs.getInt("capacity"));
             textID.setText(Integer.toString(rs.getInt("ID")));
-            chkProj.setSelected(rs.getBoolean("projector"));
         } catch (SQLException ex) {
 
         }
@@ -740,12 +714,10 @@ public final class roomsScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnPrevious;
     private javax.swing.JButton btnSaveRecord;
     private javax.swing.JButton btnUpdateRecord;
-    private javax.swing.JCheckBox chkProj;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jCmbType;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JLabel lblCapacity;
-    private javax.swing.JLabel lblProjector;
     private javax.swing.JLabel lblType;
     private javax.swing.JSpinner spnCap;
     private javax.swing.JTextField textID;

@@ -62,12 +62,10 @@ public class newUser extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         lblPassword = new javax.swing.JLabel();
         textFirstName = new javax.swing.JTextField();
-        textID = new javax.swing.JTextField();
         textLastName = new javax.swing.JTextField();
         jPassword = new javax.swing.JPasswordField();
         lblPassword1 = new javax.swing.JLabel();
         lblPassword2 = new javax.swing.JLabel();
-        lblPassword3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Booking system");
@@ -88,7 +86,7 @@ public class newUser extends javax.swing.JFrame {
             }
         });
 
-        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "New guest", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "New user", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         lblPassword.setText("Password");
 
@@ -98,17 +96,9 @@ public class newUser extends javax.swing.JFrame {
             }
         });
 
-        textID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textIDActionPerformed(evt);
-            }
-        });
-
         lblPassword1.setText("First name");
 
         lblPassword2.setText("Last name");
-
-        lblPassword3.setText("ID");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -121,10 +111,6 @@ public class newUser extends javax.swing.JFrame {
                         .addComponent(lblPassword)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(lblPassword3)
-                        .addGap(18, 18, 18)
-                        .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel11Layout.createSequentialGroup()
                             .addComponent(lblPassword1)
@@ -139,7 +125,7 @@ public class newUser extends javax.swing.JFrame {
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPassword1)
                     .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -147,15 +133,11 @@ public class newUser extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPassword2))
-                .addGap(13, 13, 13)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPassword3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPassword))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -192,10 +174,6 @@ public class newUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFirstNameActionPerformed
 
-    private void textIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textIDActionPerformed
-
     /**
      * Will take the deta from the form and save it to the database as a new guest 
      * 
@@ -206,7 +184,6 @@ public class newUser extends javax.swing.JFrame {
 
         String first = textFirstName.getText();
         String last = textLastName.getText();
-        String ID = textID.getText();
         String password = jPassword.getText();
 
         try {
@@ -220,14 +197,13 @@ public class newUser extends javax.swing.JFrame {
 
                     rs.moveToInsertRow();
 
-                    rs.updateString("ID", ID);
                     rs.updateString("first_name", first);
                     rs.updateString("second_name", last);
                     rs.updateString("password", password);
                     rs.updateString("edit_authorisation", "u");
                     rs.insertRow();
 
-                    JOptionPane.showMessageDialog(this, ("Record Saved \n\n  ID: " + ID + "\n Password: " + password));
+                    JOptionPane.showMessageDialog(this, ("Record Saved \n\n  ID: " + first + "\n Password: " + password));
 
                     connection.closeConnection();
 
@@ -274,9 +250,7 @@ public class newUser extends javax.swing.JFrame {
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblPassword1;
     private javax.swing.JLabel lblPassword2;
-    private javax.swing.JLabel lblPassword3;
     private javax.swing.JTextField textFirstName;
-    private javax.swing.JTextField textID;
     private javax.swing.JTextField textLastName;
     // End of variables declaration//GEN-END:variables
 }

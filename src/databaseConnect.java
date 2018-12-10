@@ -30,15 +30,9 @@ public class databaseConnect {
             
         
         host = "jdbc:sqlserver://uniprojects.database.windows.net:1433;database=HomeReservation;guest=noobs@uniprojects;password=Sboons2018!;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
-        //192.168.0.35/
-        //213.104.129.95:3306
         uName = "noobs";
-        //pi
-        //root
         uPass = "test!2018";
-        //raspberry
-        //AppleBees1121@@@
-        
+
         con = DriverManager.getConnection(host, uName, uPass);
     }
 
@@ -98,7 +92,6 @@ public class databaseConnect {
         stmt = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
         String SQL = "SELECT * FROM booking where ID = " + bookID;
         rs = stmt.executeQuery(SQL);
-
     }
     
    /**
@@ -141,9 +134,7 @@ public class databaseConnect {
         stmt = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
         String SQL = "SELECT * FROM guest";
         rs = stmt.executeQuery(SQL);
-        //This will access the table
-
-        
+        //This will access the table  
     }
 
     /**
