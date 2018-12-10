@@ -41,7 +41,6 @@ public class newUser extends javax.swing.JFrame {
      */
     public void DoConnect() throws SQLException {
 
-        textID.setText("");
         textFirstName.setText("");
         textLastName.setText("");
         //This will access the table       
@@ -137,7 +136,7 @@ public class newUser extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPassword))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,7 +202,7 @@ public class newUser extends javax.swing.JFrame {
                     rs.updateString("edit_authorisation", "u");
                     rs.insertRow();
 
-                    JOptionPane.showMessageDialog(this, ("Record Saved \n\n  ID: " + first + "\n Password: " + password));
+                    JOptionPane.showMessageDialog(this, ("Record Saved \n\n  Name: " + first + "\n Password: " + password));
 
                     connection.closeConnection();
 
