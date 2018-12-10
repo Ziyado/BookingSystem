@@ -1,46 +1,49 @@
+
 import java.sql.*;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * An interface class for the system, this class contains the booking screen for
- * the system, so that the system will search for rooms and allow the guest to 
+ * the system, so that the system will search for rooms and allow the guest to
  * book a room.
- * 
- * 
+ *
+ *
  */
 public class myBookings extends javax.swing.JFrame {
 
     /**
      * Creates new form myBookings
      */
-    
     databaseConnect connection;
     ResultSet rs;
     int curRow = 0;
     String ID;
     String auth;
-        
+
     /**
      *
-     * @param guestID temporarily holds guest ID until moved to a global variable
-     * @param authorisation temporarily holds guest authorization until moved to a global variable
+     * @param guestID temporarily holds guest ID until moved to a global
+     * variable
+     * @param authorisation temporarily holds guest authorization until moved to
+     * a global variable
      * @throws SQLException will identify an SQL error if/when one occurs
      */
     public myBookings(String guestID, String authorisation) throws SQLException {
 
-        if (connection == null){
-            connection = new databaseConnect(); 
+        if (connection == null) {
+            connection = new databaseConnect();
         }
-        
+
         ID = guestID;
         auth = authorisation;
 
         initComponents();
-        
+
         DoConnect();
     }
 
@@ -50,15 +53,7 @@ public class myBookings extends javax.swing.JFrame {
      */
     public void DoConnect() throws SQLException {
 
-        boolean boolID = false;            
-        connection.getMyBookings(ID);
-        
-        rs = connection.getRS();
-        
-        while (rs.next()){
-            getRecordDetails();
-            curRow = rs.getInt("ID");
-        }
+        boolean boolID = false;
     }
 
     /**
@@ -70,58 +65,13 @@ public class myBookings extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnPrevious = new javax.swing.JButton();
-        btnFirst = new javax.swing.JButton();
-        btnNext = new javax.swing.JButton();
-        btnLast = new javax.swing.JButton();
         back = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
-        jPanel11 = new javax.swing.JPanel();
-        roomID = new javax.swing.JTextField();
-        spnCap = new javax.swing.JSpinner();
-        textDate = new javax.swing.JTextField();
-        lblType1 = new javax.swing.JLabel();
-        textType = new javax.swing.JTextField();
-        textTime = new javax.swing.JTextField();
-        lblType = new javax.swing.JLabel();
-        lblCapacity = new javax.swing.JLabel();
-        lblProjector1 = new javax.swing.JLabel();
-        lblProjector2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Booking system");
-
-        btnPrevious.setBackground(new java.awt.Color(0, 102, 255));
-        btnPrevious.setText("Previous");
-        btnPrevious.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPreviousActionPerformed(evt);
-            }
-        });
-
-        btnFirst.setBackground(new java.awt.Color(0, 102, 255));
-        btnFirst.setText("First");
-        btnFirst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFirstActionPerformed(evt);
-            }
-        });
-
-        btnNext.setBackground(new java.awt.Color(0, 102, 255));
-        btnNext.setText("Next");
-        btnNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNextActionPerformed(evt);
-            }
-        });
-
-        btnLast.setBackground(new java.awt.Color(0, 102, 255));
-        btnLast.setText("Last");
-        btnLast.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLastActionPerformed(evt);
-            }
-        });
 
         back.setBackground(new java.awt.Color(0, 102, 255));
         back.setText("Back to menu");
@@ -131,109 +81,42 @@ public class myBookings extends javax.swing.JFrame {
             }
         });
 
-        btnDelete.setBackground(new java.awt.Color(0, 102, 255));
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Room", "Guest", "Date", "Time"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jScrollPane1.setViewportView(jTable1);
 
-        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Personal bookings", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
-
-        roomID.setEnabled(false);
-        roomID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                roomIDActionPerformed(evt);
+        jButton1.setText("Get Bookings");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
             }
         });
-
-        spnCap.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
-        spnCap.setEnabled(false);
-
-        textDate.setEnabled(false);
-        textDate.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textDateActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-
-        lblType1.setText("Room");
-
-        textType.setEnabled(false);
-        textType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textTypeActionPerformed(evt);
-            }
-        });
-
-        textTime.setEnabled(false);
-        textTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textTimeActionPerformed(evt);
-            }
-        });
-
-        lblType.setText("Type");
-
-        lblCapacity.setText("Capacity");
-
-        lblProjector1.setText("Date");
-
-        lblProjector2.setText("Time");
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblType1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblCapacity, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblType, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spnCap, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(roomID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textType, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(231, 231, 231))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(lblProjector1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textDate, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblProjector2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textTime, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(roomID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblType1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblType)
-                    .addComponent(textType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(spnCap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCapacity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProjector1)
-                    .addComponent(lblProjector2)
-                    .addComponent(textTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -243,123 +126,29 @@ public class myBookings extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(209, 209, 209)
-                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(back)))
+                        .addGap(0, 417, Short.MAX_VALUE)
+                        .addComponent(back))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(215, 215, 215))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(back)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnNext)
-                        .addComponent(btnLast))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnPrevious)
-                        .addComponent(btnFirst)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDelete)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(13, 13, 13)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousActionPerformed
-
-        try {
-
-            if (rs.previous()) {        //If there is another record after the current record
-
-                getRecordDetails();
-
-            } else {
-                //Go back to the current record and display message to the screen
-                rs.next();
-                JOptionPane.showMessageDialog(myBookings.this, "Start of database");
-            }
-
-        } catch (SQLException err) {        //Catch any SQL errors, and keep the system running
-
-            JOptionPane.showMessageDialog(myBookings.this, "Start of database");
-
-        }
-
-    }//GEN-LAST:event_btnPreviousActionPerformed
-
-    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
-
-        try {
-
-            rs.first();     // Go to the first record in recordset 
-
-            getRecordDetails();
-
-        } catch (SQLException err) {        //Catch any SQL errors, and keep the system running
-
-            JOptionPane.showMessageDialog(myBookings.this, err.getMessage());
-
-        }
-
-    }//GEN-LAST:event_btnFirstActionPerformed
-
-    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-
-        try {
-
-            if (rs.next()) {        //If there is another record after the current record
-
-                getRecordDetails();
-
-            } else {
-                //Go back to the current record and display message to the screen
-                rs.previous();
-                JOptionPane.showMessageDialog(myBookings.this, "End of database");
-            }
-
-        } catch (SQLException err) {        //Catch any SQL errors, and keep the system running
-
-            JOptionPane.showMessageDialog(myBookings.this, "End of database");
-
-        }
-
-    }//GEN-LAST:event_btnNextActionPerformed
-
-    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
-
-        try {
-
-            rs.last();     // Go to the first record in recordset 
-
-            getRecordDetails();
-
-        } catch (SQLException err) {        //Catch any SQL errors, and keep the system running
-
-            JOptionPane.showMessageDialog(myBookings.this, err.getMessage());
-
-        }
-
-    }//GEN-LAST:event_btnLastActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
 
@@ -381,101 +170,59 @@ public class myBookings extends javax.swing.JFrame {
 
     }//GEN-LAST:event_backActionPerformed
 
-    private void textTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTimeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textTimeActionPerformed
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try {
-           
-            connection.getSpecificBooking(curRow);
-            rs = connection.getRS();
-            rs.first();
-            
-            rs.deleteRow();     //Delete the current row
-
-            //Close the database
-            connection.closeConnection();
-            //connection.searchBookings();
-
-            JOptionPane.showMessageDialog(this, "Record Deleted");
-
-            this.dispose();
-
-            if (auth.equals("a")) {
-                try {
-                    new mainMenuAdmin(ID).setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {
-                try {
-                    new mainMenu(ID).setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
+            connection.getBookingbyBookID(ID);
         } catch (SQLException ex) {
-            Logger.getLogger(adminScreen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(myBookings.class.getName()).log(Level.SEVERE, null, ex);
         }
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        ResultSet rs = connection.getRS();
+        try {
+            while (rs.next()) {
+                String ID = rs.getString("ID");
+                String room_name = rs.getString("room_name");
+                String guest = rs.getString("first_name");
+                String date = rs.getString("date");
+                String time = rs.getString("time");
+                model.addRow(new Object[]{ID, room_name, guest, date, time});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(myBookings.class.getName()).log(Level.SEVERE, null, ex);
+        }    }//GEN-LAST:event_jButton1MouseClicked
 
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
-    private void textDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDateActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textDateActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void roomIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roomIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_roomIDActionPerformed
-
-    private void textTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textTypeActionPerformed
-
-    private void getRecordDetails() throws SQLException {
-
-        int id_room = rs.getInt("roomID");
-        Date date = rs.getDate("date");
-        Time time = rs.getTime("time");
-        int capacity = rs.getInt("capacity");
-        boolean projector = rs.getBoolean("projector");
-        String type = rs.getString("type");
-
-        String idRoom = Integer.toString(id_room);
-
-        textType.setText(type);
-        roomID.setText(idRoom);
-        spnCap.setValue(capacity);
-        Format formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String bookingDate = formatter.format(date);
-        formatter = new SimpleDateFormat("HH:mm:ss");
-        String bookingTime = formatter.format(time);
-        textDate.setText(bookingDate);
-        textTime.setText(bookingTime);
-
-    }
-
+//    private void getRecordDetails() throws SQLException {
+//
+//        int id_room = rs.getInt("roomID");
+//        Date date = rs.getDate("date");
+//        Time time = rs.getTime("time");
+//        int capacity = rs.getInt("capacity");
+//        boolean projector = rs.getBoolean("projector");
+//        String type = rs.getString("type");
+//
+//        String idRoom = Integer.toString(id_room);
+//
+//        textType.setText(type);
+//        roomID.setText(idRoom);
+//        spnCap.setValue(capacity);
+//        Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+//        String bookingDate = formatter.format(date);
+//        formatter = new SimpleDateFormat("HH:mm:ss");
+//        String bookingTime = formatter.format(time);
+//        textDate.setText(bookingDate);
+//        textTime.setText(bookingTime);
+//
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
-    private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnFirst;
-    private javax.swing.JButton btnLast;
-    private javax.swing.JButton btnNext;
-    private javax.swing.JButton btnPrevious;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JLabel lblCapacity;
-    private javax.swing.JLabel lblProjector1;
-    private javax.swing.JLabel lblProjector2;
-    private javax.swing.JLabel lblType;
-    private javax.swing.JLabel lblType1;
-    private javax.swing.JTextField roomID;
-    private javax.swing.JSpinner spnCap;
-    private javax.swing.JTextField textDate;
-    private javax.swing.JTextField textTime;
-    private javax.swing.JTextField textType;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

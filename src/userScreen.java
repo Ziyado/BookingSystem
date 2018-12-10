@@ -55,12 +55,12 @@ public class userScreen extends javax.swing.JFrame {
 
                 String id = rs.getString("ID");
                 String first_name = rs.getString("first_name");
-                String last_name = rs.getString("second_name");
+                String second_name = rs.getString("second_name");
                 authorisation = rs.getString("edit_authorisation");
                 
                 textID.setText(id);
                 textFirstName.setText(first_name);
-                textLastName.setText(last_name);
+                textLastName.setText(second_name);
 
                 boolID = true;
             }

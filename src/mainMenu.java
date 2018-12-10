@@ -160,18 +160,13 @@ public class mainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogOutActionPerformed
 
     private void btnUserScreen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserScreen1ActionPerformed
-         try {
+        try {
             new myBookings(guestID, authorisation).setVisible(true);
         } catch (SQLException ex) {
-            //Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(mainMenu.this, "There are no bookings");
-            try {
-            new mainMenu(guestID).setVisible(true);
-        } catch (SQLException x) {
             Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
-    }                                              
+                                                  
     
         /*
         

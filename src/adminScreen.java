@@ -53,7 +53,7 @@ public final class adminScreen extends javax.swing.JFrame {
     @SuppressWarnings("empty-statement")
     public void DoConnect() throws SQLException {
 
-        connection.getUsers();
+        connection.getUsersN();
         //This will access the table
         
         rs = connection.getRS();
@@ -498,7 +498,7 @@ public final class adminScreen extends javax.swing.JFrame {
             connection.closeConnection();
 
             //Reopen the database
-            connection.getUsers();
+            connection.getUsersN();
             rs = connection.getRS();
             //This will access the table
 
@@ -643,10 +643,9 @@ public final class adminScreen extends javax.swing.JFrame {
             rs.moveToInsertRow();   //Move to the end of record set
 
             //Update recordset with the new record
-            rs.updateString("ID", ID);
-            rs.updateString("First_Name", first);
-            rs.updateString("Last_Name", last);
-            rs.updateString("Password", password);
+            rs.updateString("first_Name", first);
+            rs.updateString("second_Name", last);
+            rs.updateString("password", password);
             rs.updateString("edit_authorisation", setAuthorisation);
             rs.insertRow();
 
@@ -654,7 +653,7 @@ public final class adminScreen extends javax.swing.JFrame {
             connection.closeConnection();
 
             //Reconnect to the database
-            connection.getUsers();
+            connection.getUsersN();
             rs = connection.getRS();
             //This will access the table
 
@@ -663,7 +662,7 @@ public final class adminScreen extends javax.swing.JFrame {
             int id_col = rs.getInt("ID");
             String id = Integer.toString(id_col);
             String first_name2 = rs.getString("first_name");
-            String last_name2 = rs.getString("last_name");
+            String last_name2 = rs.getString("second_name");
             String setAuthorisation2 = rs.getString("edit_authorisation");
 
             //Put recordset details to the screen

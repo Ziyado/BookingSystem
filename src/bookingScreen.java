@@ -380,7 +380,7 @@ public class bookingScreen extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         try {
-            connection.getRooms();
+            connection.getUnBookedRooms();
         } catch (SQLException ex) {
             Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
