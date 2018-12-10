@@ -132,6 +132,7 @@ public class loginScreen extends javax.swing.JFrame {
         String uname = userName.getText();
         String password = String.valueOf(textPassword.getPassword());
         String authorisation = "u";
+        String ID = "";
 
         try {
             while (rs.next()) {
@@ -141,6 +142,7 @@ public class loginScreen extends javax.swing.JFrame {
                         if (password.equals(rs.getString("Password"))) {
                             boolID = true;
                             authorisation = rs.getString("edit_authorisation");
+                            ID = rs.getString("ID");
                         }
                     }
                 } catch (SQLException ex) {
@@ -165,12 +167,12 @@ public class loginScreen extends javax.swing.JFrame {
 
                 if (authorisation.equals("u")) {
 
-                    new mainMenu(uname).setVisible(true);
+                    new mainMenu(ID).setVisible(true);
                     this.dispose();
 
                 } else if (authorisation.equals("a")) {
 
-                    new mainMenuAdmin(rs.getString("ID")).setVisible(true);
+                    new mainMenuAdmin(ID).setVisible(true);
                     this.dispose();
 
                 }

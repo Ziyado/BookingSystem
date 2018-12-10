@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
  * An interface class for the system, this class contains searching and making
  * bookings with rooms on the database.
  *
- * 
+ *
  */
 public class bookingScreen extends javax.swing.JFrame {
 
@@ -18,8 +18,6 @@ public class bookingScreen extends javax.swing.JFrame {
     ResultSet rs;
     String guestID;
     String authorisation;
-    DefaultTableModel model;
-    int capacity = 0;
     String bookingTime = "";
     String date = "";
 
@@ -29,8 +27,7 @@ public class bookingScreen extends javax.swing.JFrame {
      *
      * @param ID Will hold the guest ID temporarily until stored on the global
      * variable
-     * @param author Will hold the guest authorization temporarily until stored
-     * on the global variable
+     * @param auth
      *
      * @throws SQLException will identify an SQL error if/when one occurs
      */
@@ -73,9 +70,9 @@ public class bookingScreen extends javax.swing.JFrame {
         dateLabel1 = new javax.swing.JLabel();
         timeLabel = new javax.swing.JLabel();
         cmbTime = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        roomsAvailable = new javax.swing.JTable();
         btnSearch = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "View users", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -183,17 +180,29 @@ public class bookingScreen extends javax.swing.JFrame {
 
         cmbTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00", " " }));
 
-        roomsAvailable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        roomsAvailable.setModel(new javax.swing.table.DefaultTableModel(
+        btnSearch.setBackground(new java.awt.Color(0, 102, 255));
+        btnSearch.setText("Search");
+        btnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSearchMouseClicked(evt);
+            }
+        });
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Room name", "Type", "Room capacity", "Projector"
+                "ID", "Name", "Type", "Capacity"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -207,43 +216,34 @@ public class bookingScreen extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(roomsAvailable);
-
-        btnSearch.setBackground(new java.awt.Color(0, 102, 255));
-        btnSearch.setText("Search");
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
-            }
-        });
+        jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(timeLabel)
+                        .addGap(14, 14, 14)
+                        .addComponent(dateLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSearch))
+                        .addComponent(spnCapacity, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(dateLabel2)
-                                    .addComponent(dateLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(spnCapacity, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                                .addComponent(timeLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmbTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSearch))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(dateLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -262,9 +262,9 @@ public class bookingScreen extends javax.swing.JFrame {
                     .addComponent(cmbTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(timeLabel)
                     .addComponent(btnSearch))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                .addGap(30, 30, 30))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -301,51 +301,6 @@ public class bookingScreen extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
-        model = (DefaultTableModel) roomsAvailable.getModel();
-
-        model.setRowCount(0);
-
-        capacity = (int) spnCapacity.getValue();
-
-        bookingTime = cmbTime.getSelectedItem().toString() + ":00";
-
-        if (datePicker.getDate() != null) {
-            SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
-            date = formater.format(datePicker.getDate());
-
-            try {
-                connection.searchBookings(capacity, bookingTime, date);
-                rs = connection.getRS();
-            } catch (SQLException ex) {
-                Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            try {
-                while (rs.next()) {
-
-                    int data1 = rs.getInt("ID");
-                    String data2 = rs.getString("type");
-                    int data3 = rs.getInt("capacity");
-                    int tempdata4 = rs.getInt("projector");
-                    boolean data4 = false;
-                    if (tempdata4 == 1) {
-                        data4 = true;
-                    }
-
-                    Object[] row = {data1, data2, data3, data4};
-
-                    model.addRow(row);
-
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(bookingScreen.this, "ERROR \n No date entered");
-        }
-
-
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnLoginScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginScreenActionPerformed
@@ -381,12 +336,19 @@ public class bookingScreen extends javax.swing.JFrame {
             Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        int row = roomsAvailable.convertRowIndexToModel(roomsAvailable.getSelectedRow());
-        int roomID = (int) roomsAvailable.getValueAt(row, 0);
+        int row = jTable1.getSelectedRow();
+        int column = 0;
+        String roomID = "";
+
+        if (row == -1) {
+            JOptionPane.showMessageDialog(bookingScreen.this, "Please Search Rooms and Select One");
+        } else {
+            roomID = jTable1.getModel().getValueAt(row, column).toString();
+        }
 
         try {
             rs.moveToInsertRow();
-            rs.updateInt("roomID", roomID);
+            rs.updateString("roomID", roomID);
             rs.updateString("guestID", guestID);
             rs.updateString("date", date);
             rs.updateString("time", bookingTime);
@@ -414,6 +376,30 @@ public class bookingScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textAuthorisation3ActionPerformed
 
+    private void btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseClicked
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        try {
+            connection.getRooms();
+        } catch (SQLException ex) {
+            Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        ResultSet res = connection.getRS();
+
+        try {
+            while (res.next()) {
+                int ID = res.getInt("ID");
+                String type = res.getString("type");
+                int capacity = res.getInt("capacity");
+                String room_name = res.getString("room_name");
+                model.addRow(new Object[]{ID, room_name, type, capacity});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSearchMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBook;
@@ -426,10 +412,10 @@ public class bookingScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPasswordField jPassword3;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblPassword6;
     private javax.swing.JLabel lblPassword7;
-    private javax.swing.JTable roomsAvailable;
     private javax.swing.JSpinner spnCapacity;
     private javax.swing.JTextField textAuthorisation3;
     private javax.swing.JTextField textFirstName3;
