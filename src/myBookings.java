@@ -172,7 +172,7 @@ public class myBookings extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try {
-            connection.getBookingbyBookID(ID);
+            connection.getBookingbyGuestID(ID);
         } catch (SQLException ex) {
             Logger.getLogger(myBookings.class.getName()).log(Level.SEVERE, null, ex);
         }

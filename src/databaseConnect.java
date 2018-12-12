@@ -42,13 +42,19 @@ public class databaseConnect {
      * @throws SQLException will identify an SQL error if/when one occurs
      */
     public void getRooms() throws SQLException {
-
         //Runs SQL statement on the database
         stmt = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
         String SQL = "SELECT * FROM room";
         rs = stmt.executeQuery(SQL);
         //This will access the table
-
+    }
+    
+    public void getRoomsN() throws SQLException {
+        //Runs SQL statement on the database
+        stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        String SQL = "SELECT * FROM room";
+        rs = stmt.executeQuery(SQL);
+        //This will access the table
     }
 
     public void getUnBookedRooms() throws SQLException {
@@ -112,7 +118,7 @@ public class databaseConnect {
         rs = stmt.executeQuery(SQL);
     }
 
-    public void getBookingbyBookID(String ID) throws SQLException {
+    public void getBookingbyGuestID(String ID) throws SQLException {
         Statement stmt = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
         String SQL = "SELECT * FROM booking LEFT JOIN room ON booking.roomID = room.ID LEFT JOIN guest ON booking.guestID = guest.ID WHERE booking.guestID = " + ID;
         rs = stmt.executeQuery(SQL);
