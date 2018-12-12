@@ -402,8 +402,16 @@ public class bookingScreen extends javax.swing.JFrame {
         } else {
             roomID = jTable1.getModel().getValueAt(row, column).toString();
         }
-        int roomprice = Integer.parseInt(jLabel1.getText());
-        int mealprice = Integer.parseInt(jLabel2.getText());
+        int roomprice = 0;
+        int mealprice = 0;
+        try{
+        roomprice = Integer.parseInt(jLabel1.getText());
+        mealprice = Integer.parseInt(jLabel2.getText());
+        }
+        catch(NumberFormatException ex){
+            
+        }
+        
         total = roomprice + mealprice;
         try {
             rs.moveToInsertRow();
