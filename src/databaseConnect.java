@@ -13,9 +13,9 @@ import javax.swing.JComboBox;
  */
 public class databaseConnect {
 
-    String host;
-    String uName;
-    String uPass;
+    private final String host;
+    private final String uName;
+    private final String uPass;
     Connection con;
     Statement stmt;
     ResultSet rs;
@@ -35,12 +35,7 @@ public class databaseConnect {
         con = DriverManager.getConnection(host, uName, uPass);
     }
 
-    /**
-     * Gets all rooms on the database from table room, and stores them as a
-     * resultset
-     *
-     * @throws SQLException will identify an SQL error if/when one occurs
-     */
+   
     public void getRooms() throws SQLException {
         //Runs SQL statement on the database
         stmt = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);

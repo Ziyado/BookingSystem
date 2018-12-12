@@ -239,6 +239,9 @@ public class bookingScreen extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jComboBox1MouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jComboBox1MousePressed(evt);
+            }
         });
 
         jLabel4.setText("$");
@@ -321,9 +324,8 @@ public class bookingScreen extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnBook)
-                        .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(btnBook)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
         );
@@ -477,7 +479,11 @@ public class bookingScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MousePressed
 
     private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
-        int cost;
+
+    }//GEN-LAST:event_jComboBox1MouseClicked
+
+    private void jComboBox1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MousePressed
+int cost;
         int index = jComboBox1.getSelectedIndex();
         if (index == 0) {
             cost = 20;
@@ -489,9 +495,7 @@ public class bookingScreen extends javax.swing.JFrame {
             cost = 100;
         }
         jLabel3.setText(String.valueOf(cost));
-
-
-    }//GEN-LAST:event_jComboBox1MouseClicked
+    }//GEN-LAST:event_jComboBox1MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
