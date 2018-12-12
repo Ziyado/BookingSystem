@@ -35,7 +35,6 @@ public class databaseConnect {
         con = DriverManager.getConnection(host, uName, uPass);
     }
 
-   
     public void getRooms() throws SQLException {
         //Runs SQL statement on the database
         stmt = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
@@ -43,7 +42,7 @@ public class databaseConnect {
         rs = stmt.executeQuery(SQL);
         //This will access the table
     }
-    
+
     public void getRoomsN() throws SQLException {
         //Runs SQL statement on the database
         stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -149,13 +148,15 @@ public class databaseConnect {
         rs = stmt.executeQuery(SQL);
         //This will access the table  
     }
-public void getUsersN() throws SQLException {
+
+    public void getUsersN() throws SQLException {
 
         stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         String SQL = "SELECT * FROM guest";
         rs = stmt.executeQuery(SQL);
         //This will access the table  
     }
+
     /**
      * takes a guest ID, converting it to a SQL string format, which is then
      * used in a query to ensure that it is unique
@@ -164,6 +165,12 @@ public void getUsersN() throws SQLException {
      * @return returns if the ID is unique
      * @throws SQLException will identify an SQL error if/when one occurs
      */
+    public void Delete(String ID) throws SQLException {
+        stmt = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+        String SQL = "DELETE from booking WHERE ID = "+ID;
+        stmt.execute(SQL);
+    }
+
     public ResultSet getRS() {
 
         return rs;
