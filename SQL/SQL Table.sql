@@ -12,6 +12,7 @@ CREATE TABLE room (
   [type] varchar(20),
   [capacity] int,
   [room_name] varchar(20),
+  [cost] int,
   PRIMARY KEY ([ID])
 );
 

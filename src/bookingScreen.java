@@ -491,7 +491,7 @@ public class bookingScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1MouseClicked
 
     private void jComboBox1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MousePressed
-int cost;
+        int cost;
         int index = jComboBox1.getSelectedIndex();
         if (index == 0) {
             cost = 20;
